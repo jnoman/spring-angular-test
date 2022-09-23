@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import lu.atozdigital.api.modules.Article;
+import lu.atozdigital.api.model.Article;
 import lu.atozdigital.api.repository.ArticleRepository;
 
 @RepositoryRestController
