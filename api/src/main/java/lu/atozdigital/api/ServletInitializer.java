@@ -1,4 +1,4 @@
-package lu.atoedigital.api;
+package lu.atozdigital.api;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
