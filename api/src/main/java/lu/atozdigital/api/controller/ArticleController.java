@@ -33,7 +33,7 @@ public class ArticleController {
 	        articleRepository.save(article);
 	 
 	         
-	        return new ResponseEntity<Object>("ajouter terminer avec succes", HttpStatus.OK);
+	        return new ResponseEntity<Object>("ajouter terminer avec succes", HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<Object>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
 		}

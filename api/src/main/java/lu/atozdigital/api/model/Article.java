@@ -11,6 +11,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,5 +32,6 @@ public class Article {
 	@Lob
     private byte [] picture ;
 	@ManyToMany(mappedBy = "articles")
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Order> orders;
 }
