@@ -1,5 +1,6 @@
 package lu.atozdigital.api.modules;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,10 +19,10 @@ public class Article {
 	@Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long Id;
-	@NotNull
+	@Column(nullable = false)
     private String name;
-	@NotNull
+	@Column(nullable = false)
     private double price;
-	@NotNull
+	@Column(nullable = false)
 	private String picture;
 }
