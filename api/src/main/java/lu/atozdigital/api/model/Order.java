@@ -1,5 +1,6 @@
 package lu.atozdigital.api.model;
 
+import java.time.Instant;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -31,6 +32,8 @@ public class Order {
     private Long Id;
 	@Column(nullable = false)
     private String reference;
+	@Column(nullable = false)
+	private Instant createdDate;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "order_article",

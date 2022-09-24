@@ -1,6 +1,7 @@
 package lu.atozdigital.api.controller;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ public class OrderController {
 	public ResponseEntity<Object> saveArticle(@RequestBody Order order) throws IOException {
 		try {
 			order.setReference(UUID.randomUUID().toString());
+			order.setCreatedDate(Instant.now());
 			orderService.saveOrder(order);
 	        return new ResponseEntity<Object>("ajouter terminer avec succes", HttpStatus.CREATED);
 		} catch (Exception e) {
