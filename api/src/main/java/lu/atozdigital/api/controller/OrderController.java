@@ -17,25 +17,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import lu.atozdigital.api.model.Article;
 import lu.atozdigital.api.model.Order;
-import lu.atozdigital.api.repository.ArticleRepository;
-import lu.atozdigital.api.repository.OrderRepository;
+import lu.atozdigital.api.service.ArticleService;
+import lu.atozdigital.api.service.OrderService;
 import net.minidev.json.JSONObject;
 
 @RepositoryRestController
 public class OrderController {
 	
 	@Autowired
-    private OrderRepository orderRepository;
+    private OrderService orderService;
 	
 	@Autowired
-    private ArticleRepository articleRepository;
+    private ArticleService articleService;
 	
 	@ResponseBody
 	@RequestMapping(path = "/orders", method = RequestMethod.POST)
 	public ResponseEntity<Object> saveArticle(@RequestBody Order order) throws IOException {
 		try {
 			order.setReference(UUID.randomUUID().toString());
-			orderRepository.save(order);
+			orderService.saveOrder(order);
 	        return new ResponseEntity<Object>("ajouter terminer avec succes", HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<Object>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
@@ -45,23 +45,23 @@ public class OrderController {
 	
 	@GetMapping("/orders")
     public ResponseEntity<Object> getAllOrders() {
-	        return new ResponseEntity<Object>(orderRepository.findAll(), HttpStatus.OK);
+	        return new ResponseEntity<Object>(orderService.getAllOrders(), HttpStatus.OK);
     }
 	
 	@PutMapping("/orders/{id}")
     public ResponseEntity<Object> updateOrderById(@PathVariable Long id, @RequestBody JSONObject jsonRequest) {
 		try {
-			if (orderRepository.existsById(id)) {
-				Order order = orderRepository.findById(id).get();
+			if (orderService.existsById(id)) {
+				Order order = orderService.findOrderById(id);
 				Long articleID = ((Number) jsonRequest.get("articleID")).longValue();
-				if (articleRepository.existsById(id)) {
-					Article article = articleRepository.findById(articleID).get();
+				if (articleService.existsById(id)) {
+					Article article = articleService.findArticleById(articleID);
 					if(((String) jsonRequest.get("Statu")).equals("add")) {
 						if(order.getArticles().contains(article)) {
 							return new ResponseEntity<Object>("Order contient déjà cet article", HttpStatus.OK);
 						} else {
 							order.getArticles().add(article);
-							orderRepository.save(order);
+							orderService.saveOrder(order);
 					        return new ResponseEntity<Object>("l'ajouter d'article sur order terminer avec succes ", HttpStatus.OK);
 						}
 					}
@@ -70,7 +70,7 @@ public class OrderController {
 							return new ResponseEntity<Object>("Order ne contient pas cet article", HttpStatus.OK);
 						} else {
 							order.getArticles().remove(article);
-							orderRepository.save(order);
+							orderService.saveOrder(order);
 					        return new ResponseEntity<Object>("la suppresion d'article sur order terminer avec succes ", HttpStatus.OK);
 						}
 					}

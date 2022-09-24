@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import lu.atozdigital.api.model.Article;
-import lu.atozdigital.api.repository.ArticleRepository;
+import lu.atozdigital.api.service.ArticleService;
 
 @RepositoryRestController
 public class ArticleController {
 	
 	@Autowired
-    private ArticleRepository articleRepository;
+    private ArticleService articleService;
      
 	@ResponseBody
 	@RequestMapping(path = "/articles", method = RequestMethod.POST)
@@ -30,7 +30,7 @@ public class ArticleController {
 		try {
 	        article.setPicture(multipartFile.getBytes());
 	         
-	        articleRepository.save(article);
+	        articleService.saveArticle(article);
 	 
 	         
 	        return new ResponseEntity<Object>("ajouter terminer avec succes", HttpStatus.CREATED);
@@ -43,7 +43,7 @@ public class ArticleController {
 	@GetMapping("/articles/{id}")
     public ResponseEntity<Object> getArticleById(@PathVariable Long id) {
 		try {
-			Article article = articleRepository.findById(id).get();
+			Article article = articleService.findArticleById(id);
 	        return new ResponseEntity<Object>(article, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<Object>("Article is not found", HttpStatus.BAD_REQUEST);
@@ -52,6 +52,6 @@ public class ArticleController {
 	
 	@GetMapping("/articles")
     public ResponseEntity<Object> getAllArticles() {
-	        return new ResponseEntity<Object>(articleRepository.findAll(), HttpStatus.OK);
+	        return new ResponseEntity<Object>(articleService.getAllArticles(), HttpStatus.OK);
     }
 }
