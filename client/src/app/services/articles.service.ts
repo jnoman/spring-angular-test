@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Article } from '../model/Article';
 
@@ -10,6 +10,7 @@ export class ArticlesService {
   constructor(private http:HttpClient) { }
 
   getAllArticles(){
-    return this.http.get<Article[]>(this.hostArticles+"/articles");
+    let headres= new HttpHeaders({'Authorization':localStorage.getItem("token")+""});
+    return this.http.get<Article[]>(this.hostArticles+"/articles",{headers:headres});
   }
 }

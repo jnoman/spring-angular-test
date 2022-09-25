@@ -1,5 +1,5 @@
 export interface Article{
-    articleName:String,
+    name:String,
     price:Number,
-    picture:File
+    picture:any
 }
