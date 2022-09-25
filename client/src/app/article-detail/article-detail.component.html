@@ -1,0 +1,12 @@
+<div class="container mt-4">
+    <div class="card mb-3" *ngIf="article; else templateName">
+        <img [src]='"data:image/jpeg;base64,"+article.picture' class="card-img-top" style="max-height: 400px;">
+        <div class="card-body">
+            <h3 class="card-title">{{article.name}}</h3>
+            <p class="card-text"><strong>Price:</strong> {{article.price}}MAD</p>
+        </div>
+      </div>
+    <ng-template #templateName>
+        no article with this id
+    </ng-template>
+</div>

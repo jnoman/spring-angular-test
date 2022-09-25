@@ -20,7 +20,11 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthenticationService, private router:Router) { }
 
   ngOnInit(): void {
-    
+    if (localStorage.getItem("token") !== null) {
+      this.authService.authenticated=true;
+    }if(this.authService.authenticated){
+      this.router.navigateByUrl("/articles");
+    }
   }
 
   onLogin(){

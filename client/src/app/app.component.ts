@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './services/authentication.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -9,15 +10,17 @@ import { AuthenticationService } from './services/authentication.service';
 })
 export class AppComponent implements OnInit {
   title = 'client';
-  constructor(private authService:AuthenticationService, private router:Router) {}
+  constructor(private authService:AuthenticationService, private router:Router, private Location:Location) {}
   ngOnInit(): void {
     if (localStorage.getItem("token") !== null) {
       this.authService.authenticated=true;
     }
-    if(!this.authService.authenticated){
-      this.router.navigateByUrl("/login");
-    } else {
-      this.router.navigateByUrl("/articles");
+    if("" === this.Location.path()){
+      if(this.authService.authenticated){
+        this.router.navigateByUrl("/articles");
+      } else {
+        this.router.navigateByUrl("/login");
+      }
     }
   }
 

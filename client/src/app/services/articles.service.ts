@@ -13,4 +13,9 @@ export class ArticlesService {
     let headres= new HttpHeaders({'Authorization':localStorage.getItem("token")+""});
     return this.http.get<Article[]>(this.hostArticles+"/articles",{headers:headres});
   }
+
+  getArticleByID(id:any){
+    let headres= new HttpHeaders({'Authorization':localStorage.getItem("token")+""});
+    return this.http.get<Article[]>(this.hostArticles+"/articles/"+id,{headers:headres});
+  }
 }

@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ArticlesService } from '../services/articles.service';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
-  selector: 'app-article',
-  templateUrl: './article.component.html',
-  styleUrls: ['./article.component.css']
+  selector: 'app-article-detail',
+  templateUrl: './article-detail.component.html',
+  styleUrls: ['./article-detail.component.css']
 })
-export class ArticleComponent implements OnInit {
-  articleList : any ;
-
+export class ArticleDetailComponent implements OnInit {
+  article : any ;
+  id:any;
   constructor(private authService:AuthenticationService, private articleService:ArticlesService,
-     private router:Router) { }
+    private router:Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     if (localStorage.getItem("token") !== null) {
@@ -21,9 +21,12 @@ export class ArticleComponent implements OnInit {
     if(!this.authService.authenticated){
       this.router.navigateByUrl("/login");
     } 
-    this.articleService.getAllArticles()
+    this.route.params.subscribe(params => {
+      this.id=params['id'];
+    });
+    this.articleService.getArticleByID(this.id)
     .subscribe(res=>{
-      this.articleList = res;
+      this.article = res;
     });
   }
 
