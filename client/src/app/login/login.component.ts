@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
     email: "",
     password: ""
   }
-
+  msgerror!: String;
   constructor(private authService: AuthenticationService, private router:Router) { }
 
   ngOnInit(): void {
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
       this.authService.saveToken(jwt);
       this.router.navigateByUrl("/articles");
     },err=>{
-      console.log(err);
+      this.msgerror ="invalid login or password";
     })
   }
 

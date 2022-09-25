@@ -11,7 +11,6 @@ export class AppComponent implements OnInit {
   title = 'client';
   constructor(private authService:AuthenticationService, private router:Router) {}
   ngOnInit(): void {
-    console.log("aaaaaaa");
     if (localStorage.getItem("token") !== null) {
       this.authService.authenticated=true;
     }

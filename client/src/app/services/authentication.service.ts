@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Utilisateur } from '../model/Utilisateur';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,9 @@ export class AuthenticationService {
     return this.http.post(this.hostLogin+"/login", data, {observe:'response'});
   }
 
+  inscription(data:Utilisateur){
+    return this.http.post<Utilisateur>(this.hostLogin+"/utilisateurs", data, {observe:'response'});
+  }
   
   saveToken(jwt: string | null) {
     localStorage.setItem('token',"Bearer "+jwt);
