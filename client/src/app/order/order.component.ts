@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Order } from '../model/Order';
 import { AuthenticationService } from '../services/authentication.service';
 import { OrdersService } from '../services/orders.service';
 
@@ -10,6 +11,7 @@ import { OrdersService } from '../services/orders.service';
 })
 export class OrderComponent implements OnInit {
   orderList : any ;
+  order:Order={};
   constructor(private authService:AuthenticationService, private orderService:OrdersService,
     private router:Router) { }
 
@@ -23,6 +25,16 @@ export class OrderComponent implements OnInit {
     this.orderService.getAllOrders()
     .subscribe(res=>{
       this.orderList = res;
+    });
+  }
+
+  addOrder(){
+    this.orderService.addOrder(this.order)
+    .subscribe(res=>{
+      this.orderService.getAllOrders()
+      .subscribe(res=>{
+        this.orderList = res;
+      });
     });
   }
 

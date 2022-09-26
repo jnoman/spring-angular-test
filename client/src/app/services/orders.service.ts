@@ -15,6 +15,11 @@ export class OrdersService {
     return this.http.get<Order[]>(this.hostOrder+"/orders",{headers:headres});
   }
 
+  addOrder(data:any){
+    let headres= new HttpHeaders({'Authorization':localStorage.getItem("token")+""});
+    return this.http.post<Order[]>(this.hostOrder+"/orders", data,{headers:headres});
+  }
+
   getOrderByID(id:any){
     let headres= new HttpHeaders({'Authorization':localStorage.getItem("token")+""});
     return this.http.get<Order>(this.hostOrder+"/orders/"+id,{headers:headres});
