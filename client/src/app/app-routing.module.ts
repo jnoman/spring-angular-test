@@ -5,6 +5,7 @@ import { ArticleDetailComponent } from './article-detail/article-detail.componen
 import { ArticleComponent } from './article/article.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { LoginComponent } from './login/login.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { OrderComponent } from './order/order.component';
 
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path:"inscription", component:InscriptionComponent},
   {path:"articles/add", component: AddArticleComponent},
   {path:"articles/:id", component: ArticleDetailComponent},
-  {path:"orders", component: OrderComponent}
+  {path:"orders", component: OrderComponent},
+  {path:"orders/:id", component: OrderDetailComponent}
 ];
 
 @NgModule({

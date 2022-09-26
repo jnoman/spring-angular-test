@@ -1,0 +1,31 @@
+<div class="container mt-4">
+    <div *ngIf="order; else templateName1">
+        <p><strong>Reference</strong>: {{order.reference}}</p>
+        <p><strong>Created Date</strong>: {{order.createdDate}}</p>
+        <h3 class="text-center">article in this Order</h3>
+        <div class="row row-cols-1 row-cols-md-4 g-4" *ngIf="order.articles.length > 0; else templateName">
+            <ng-container *ngFor="let item of order.articles ">
+                <div class=" col-4">
+                    <div class="card">
+                        <div (click)="removeArticleFromOrder(item.id)"
+                            class="float1 position-absolute top-0 end-0 pe-1">
+                            <i class="fa fa-minus my-float"></i>
+                        </div>
+                        <img [src]='"data:image/jpeg;base64,"+item.picture' class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">{{item.name}}</h4>
+                            <p><strong>Price:</strong> {{item.price}}MAD</p>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+
+        </div>
+        <ng-template #templateName>
+            no article in this order
+        </ng-template>
+    </div>
+    <ng-template #templateName1>
+        no order with this id
+    </ng-template>
+</div>

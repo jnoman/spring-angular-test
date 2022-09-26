@@ -19,4 +19,9 @@ export class OrdersService {
     let headres= new HttpHeaders({'Authorization':localStorage.getItem("token")+""});
     return this.http.get<Order>(this.hostOrder+"/orders/"+id,{headers:headres});
   }
+
+  updateOrder(id:any,data:any){
+    let headres= new HttpHeaders({'Authorization':localStorage.getItem("token")+""});
+    return this.http.put<String>(this.hostOrder+"/orders/"+id, data,{headers:headres});
+  }
 }

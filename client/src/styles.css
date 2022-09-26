@@ -107,8 +107,26 @@
 	color:#FFF;
 }
 
+.float1{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:red;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+    cursor:pointer;
+}
+.float1:hover{
+	background-color:rgb(204, 0, 34);
+	color:#FFF;
+}
+
 .my-float{
-	margin-top:18px;
+	margin-top:16px;
+    margin-left: 3px;
     font-size: 30px !important;
 }
 

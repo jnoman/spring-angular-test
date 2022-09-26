@@ -1,9 +1,9 @@
 <div class="container mt-4">
-<table class="table" *ngIf="orderList; else templateName">
+<table class="table" *ngIf="orderList.length>0; else templateName">
     <thead>
       <tr>
         <th scope="col">Reference</th>
-        <th scope="col">Date</th>
+        <th scope="col">Created Date</th>
         <th scope="col">Edit</th>
       </tr>
     </thead>
@@ -12,7 +12,7 @@
             <tr>
                 <td>{{item.reference}}</td>
                 <td>{{item.createdDate | date: 'fullDate'}} at {{item.createdDate | date: 'shortTime'}}</td>
-                <td><a href="">Edit</a></td>
+                <td><a [routerLink]="'/orders/'+item.id">Edit</a></td>
               </tr>
         </ng-container>
     </tbody>

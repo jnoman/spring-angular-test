@@ -11,6 +11,7 @@ import { InscriptionComponent } from './inscription/inscription.component';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
 import { AddArticleComponent } from './add-article/add-article.component';
 import { OrderComponent } from './order/order.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { OrderComponent } from './order/order.component';
     InscriptionComponent,
     ArticleDetailComponent,
     AddArticleComponent,
-    OrderComponent
+    OrderComponent,
+    OrderDetailComponent
   ],
   imports: [
     BrowserModule,
