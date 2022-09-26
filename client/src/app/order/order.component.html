@@ -1,0 +1,24 @@
+<div class="container mt-4">
+<table class="table" *ngIf="orderList; else templateName">
+    <thead>
+      <tr>
+        <th scope="col">Reference</th>
+        <th scope="col">Date</th>
+        <th scope="col">Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let item of orderList ">
+            <tr>
+                <td>{{item.reference}}</td>
+                <td>{{item.createdDate | date: 'fullDate'}} at {{item.createdDate | date: 'shortTime'}}</td>
+                <td><a href="">Edit</a></td>
+              </tr>
+        </ng-container>
+    </tbody>
+  </table>
+  <ng-template #templateName>
+    no Order
+</ng-template>
+
+</div>

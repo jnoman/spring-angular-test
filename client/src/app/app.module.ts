@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
 import { AddArticleComponent } from './add-article/add-article.component';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AddArticleComponent } from './add-article/add-article.component';
     LoginComponent,
     InscriptionComponent,
     ArticleDetailComponent,
-    AddArticleComponent
+    AddArticleComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
