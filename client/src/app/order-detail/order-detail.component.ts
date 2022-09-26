@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Article } from '../model/Article';
 import { OrderDetail } from '../model/orderDertail';
+import { ArticlesService } from '../services/articles.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { OrdersService } from '../services/orders.service';
 
@@ -12,9 +14,10 @@ import { OrdersService } from '../services/orders.service';
 export class OrderDetailComponent implements OnInit {
   order : any ;
   id:any;
-  orderDetail : OrderDetail={}
+  orderDetail : OrderDetail={};
+  articleList!: Article[];
   constructor(private authService:AuthenticationService, private orderService:OrdersService,
-    private router:Router, private route: ActivatedRoute) { }
+    private router:Router, private route: ActivatedRoute, private articleService:ArticlesService) { }
 
   ngOnInit(): void {
     if (localStorage.getItem("token") !== null) {
@@ -30,19 +33,44 @@ export class OrderDetailComponent implements OnInit {
     .subscribe(res=>{
       this.order = res;
     });
+    this.ArticleNotInOrder();
   }
 
   removeArticleFromOrder(idArticle:any){
     this.orderDetail.articleID=idArticle;
     this.orderDetail.Statu="remove";
     this.orderService.updateOrder(this.id,this.orderDetail).subscribe(res=>{
-      console.log(res);
       this.orderService.getOrderByID(this.id)
       .subscribe(res=>{
         this.order = res;
+        this.ArticleNotInOrder();
       });
     });
     
   }
+  ArticleNotInOrder(){
+    this.articleService.getAllArticles()
+    .subscribe(res=>{
+      this.articleList = res;
+      for (let i = 0; i < this.order.articles.length; i++) {
+        if (this.articleList.find(x => x.id === this.order.articles[i].id)) {
+          this.articleList.splice(this.articleList.findIndex(x => x.id === this.order.articles[i].id), 1);
+        }
+      }
+    });
+  }
+
+  addArticletoOrder(idArticle:any){
+    this.orderDetail.articleID=idArticle;
+    this.orderDetail.Statu="add";
+    this.orderService.updateOrder(this.id,this.orderDetail).subscribe(res=>{
+      this.orderService.getOrderByID(this.id)
+      .subscribe(res=>{
+        this.order = res;
+        this.ArticleNotInOrder();
+      });
+    });
+  }
+  
 
 }
