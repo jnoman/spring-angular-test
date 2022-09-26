@@ -18,4 +18,9 @@ export class ArticlesService {
     let headres= new HttpHeaders({'Authorization':localStorage.getItem("token")+""});
     return this.http.get<Article[]>(this.hostArticles+"/articles/"+id,{headers:headres});
   }
+
+  addArticle(data:FormData){
+    let headres= new HttpHeaders({'Authorization':localStorage.getItem("token")+""});
+    return this.http.post(this.hostArticles+"/articles", data,{headers:headres});
+  }
 }

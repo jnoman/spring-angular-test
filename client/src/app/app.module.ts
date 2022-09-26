@@ -9,6 +9,7 @@ import { ArticleComponent } from './article/article.component';
 import { LoginComponent } from './login/login.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
+import { AddArticleComponent } from './add-article/add-article.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ArticleDetailComponent } from './article-detail/article-detail.componen
     ArticleComponent,
     LoginComponent,
     InscriptionComponent,
-    ArticleDetailComponent
+    ArticleDetailComponent,
+    AddArticleComponent
   ],
   imports: [
     BrowserModule,
